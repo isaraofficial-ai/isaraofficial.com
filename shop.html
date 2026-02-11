@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - IsaraOfficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#1e293b',
+                        accent: '#38bdf8',
+                        glow: '#818cf8',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-primary text-white overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html"
+                        class="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">ISARA<span
+                            class="text-white">OFFICIAL</span></a>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html"
+                            class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="shop.html"
+                            class="text-white hover:text-accent px-3 py-2 rounded-md text-sm font-medium transition-colors">Shop</a>
+                        <a href="about.html"
+                            class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="contact.html"
+                            class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+                        aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-btn">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-secondary" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="shop.html" class="text-white block px-3 py-2 rounded-md text-base font-medium">Shop</a>
+                <a href="about.html"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="contact.html"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-4">Educational Gallery</h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400">
+                High-resolution diagrams, notes, and illustrations for students and teachers.
+            </p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex justify-center flex-wrap gap-4 mb-12">
+            <button
+                class="px-6 py-2 rounded-full bg-accent text-primary font-semibold hover:bg-white transition-colors focus:outline-none filter-btn active"
+                data-filter="all">All</button>
+            <button
+                class="px-6 py-2 rounded-full bg-secondary border border-gray-700 text-gray-300 font-semibold hover:border-accent hover:text-white transition-colors focus:outline-none filter-btn"
+                data-filter="math">Mathematics</button>
+            <button
+                class="px-6 py-2 rounded-full bg-secondary border border-gray-700 text-gray-300 font-semibold hover:border-accent hover:text-white transition-colors focus:outline-none filter-btn"
+                data-filter="science">Science</button>
+            <button
+                class="px-6 py-2 rounded-full bg-secondary border border-gray-700 text-gray-300 font-semibold hover:border-accent hover:text-white transition-colors focus:outline-none filter-btn"
+                data-filter="tech">Physics & Tech</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="product-grid">
+
+            <!-- Product 1 Math -->
+            <div class="group relative bg-secondary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 border border-gray-800 product-card"
+                data-category="math">
+                <div
+                    class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 relative">
+                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Advanced Calculus Notes"
+                        class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            class="w-full bg-accent text-primary font-bold py-2 rounded shadow-lg hover:bg-white transition-colors buy-btn">View
+                            Details</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="text-lg font-medium text-white">Calculus Master</h3>
+                        <p class="text-sm font-medium text-accent">$12</p>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-400">Advanced Integration</p>
+                </div>
+            </div>
+
+            <!-- Product 2 Science -->
+            <div class="group relative bg-secondary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 border border-gray-800 product-card"
+                data-category="science">
+                <div
+                    class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 relative">
+                    <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Cell Structure" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            class="w-full bg-accent text-primary font-bold py-2 rounded shadow-lg hover:bg-white transition-colors buy-btn">View
+                            Details</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="text-lg font-medium text-white">Cell Anatomy</h3>
+                        <p class="text-sm font-medium text-accent">$15</p>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-400">High Detail Biology</p>
+                </div>
+            </div>
+
+            <!-- Product 3 Physics -->
+            <div class="group relative bg-secondary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 border border-gray-800 product-card"
+                data-category="tech">
+                <div
+                    class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 relative">
+                    <img src="https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Physics Formulas" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            class="w-full bg-accent text-primary font-bold py-2 rounded shadow-lg hover:bg-white transition-colors buy-btn">View
+                            Details</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="text-lg font-medium text-white">Quantum Physics</h3>
+                        <p class="text-sm font-medium text-accent">$18</p>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-400">Formula Sheet</p>
+                </div>
+            </div>
+
+            <!-- Product 4 Math -->
+            <div class="group relative bg-secondary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 border border-gray-800 product-card"
+                data-category="math">
+                <div
+                    class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 relative">
+                    <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Algebra Notes" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            class="w-full bg-accent text-primary font-bold py-2 rounded shadow-lg hover:bg-white transition-colors buy-btn">View
+                            Details</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="text-lg font-medium text-white">Algebra Pack</h3>
+                        <p class="text-sm font-medium text-accent">$10</p>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-400">Complete Set</p>
+                </div>
+            </div>
+
+            <!-- Product 5 Science -->
+            <div class="group relative bg-secondary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 border border-gray-800 product-card"
+                data-category="science">
+                <div
+                    class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 relative">
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Chemistry" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            class="w-full bg-accent text-primary font-bold py-2 rounded shadow-lg hover:bg-white transition-colors buy-btn">View
+                            Details</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="text-lg font-medium text-white">Periodic Table</h3>
+                        <p class="text-sm font-medium text-accent">$8</p>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-400">High Res Poster</p>
+                </div>
+            </div>
+
+            <!-- Product 6 Tech -->
+            <div class="group relative bg-secondary rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 border border-gray-800 product-card"
+                data-category="tech">
+                <div
+                    class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 relative">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                        alt="Tech" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <div
+                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                            class="w-full bg-accent text-primary font-bold py-2 rounded shadow-lg hover:bg-white transition-colors buy-btn">View
+                            Details</button>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="text-lg font-medium text-white">Circuit Design</h3>
+                        <p class="text-sm font-medium text-accent">$20</p>
+                    </div>
+                    <p class="mt-1 text-sm text-gray-400">Engineering Schematics</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            &copy; 2024 IsaraOfficial. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Simple Product Modal -->
+    <div id="modal" class="fixed inset-0 z-[60] overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true"
+                id="modal-overlay"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div
+                class="inline-block align-bottom bg-secondary border border-gray-700 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-secondary px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-white" id="modal-title">Product Details</h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-400" id="modal-desc">
+                                    This is a high-quality educational resource. You can purchase this item directly.
+                                </p>
+                                <p class="mt-4 text-accent font-bold text-xl" id="modal-price">$XX.XX</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button"
+                        class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-accent text-base font-medium text-primary hover:bg-white focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                        onclick="alert('Proceeding to checkout (Demo)')">
+                        Buy Now
+                    </button>
+                    <button type="button"
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-transparent text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        id="close-modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
