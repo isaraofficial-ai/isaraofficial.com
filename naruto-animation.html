@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="si">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Naruto-inspired Login Animation (Demo)</title>
+  <style>
+    /* Overlay */
+    #naruto-overlay{
+      position: fixed;
+      inset: 0;
+      display: none; /* show via JS */
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.55), rgba(0,0,0,0.85));
+      z-index: 9999;
+      backface-visibility: hidden;
+    }
+
+    /* Card containing animation */
+    .naruto-card{
+      width: 320px;
+      height: 320px;
+      border-radius: 16px;
+      background: linear-gradient(180deg,#111,#0b0b0b);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:18px;
+      padding:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 40px rgba(255,150,10,0.06);
+      transform: scale(0.9);
+      animation: cardPop 450ms cubic-bezier(.2,.9,.3,1) forwards;
+      color: #fff;
+      text-align:center;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    @keyframes cardPop {
+      to { transform: scale(1); }
+    }
+
+    /* stylized face */
+    .face{
+      position: relative;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #ffdfb0; /* skin tone */
+      box-shadow: inset -6px -8px 20px rgba(0,0,0,0.08);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow: visible;
+    }
+
+    /* headband (orange style) */
+    .headband{
+      position: absolute;
+      top: 32px;
+      left: -6px;
+      right: -6px;
+      height: 28px;
+      background: linear-gradient(90deg,#f59a1a,#ff7b00);
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+      transform: skewX(-6deg);
+    }
+
+    /* subtle symbol on headband (generic spiral, not Naruto logo) */
+    .symbol{
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 20px;
+      border-radius: 12px;
+      background: rgba(20,20,20,0.9);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:0.5px;
+    }
+
+    /* rasengan (blue energy) */
+    .rasengan{
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #9ee6ff 0%, #2fb8ff 30%, #0077d9 60%, rgba(0,119,217,0.0) 100%);
+      box-shadow: 0 0 30px rgba(47,184,255,0.35), 0 0 60px rgba(47,184,255,0.18);
+      position: relative;
+      animation: rasenganSpin 1600ms linear infinite, rasenganPulse 1200ms ease-in-out infinite;
+    }
+
+    @keyframes rasenganSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes rasenganPulse {
+      0% { transform: scale(1); opacity: 0.95; }
+      50% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.95; }
+    }
+
+    /* glow rays */
+    .rasengan::before, .rasengan::after{
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.55;
+    }
+    .rasengan::before{ background: rgba(47,184,255,0.12); }
+    .rasengan::after{ background: rgba(0,119,217,0.06); transform: scale(1.25); }
+
+    /* small text */
+    .title { font-size: 18px; font-weight: 600; }
+    .subtitle { font-size: 13px; color: #d7d7d7; }
+
+    /* demo login button */
+    .demo-area{ margin-top: 18px; display:flex; gap:12px; align-items:center; }
+    button{ padding:10px 14px; border-radius:8px; border: none; cursor: pointer; font-weight:600; }
+    .btn-login{ background: #ff7b00; color:#fff; box-shadow: 0 6px 18px rgba(255,123,0,0.18); }
+    .btn-close{ background: #222; color:#fff; border:1px solid rgba(255,255,255,0.04); }
+
+    @media (max-width:420px){
+      .naruto-card{ width: 92%; height: auto; padding:14px; }
+    }
+  </style>
+</head>
+<body>
+  <main style="padding:28px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto;">
+    <h2>Naruto-inspired login animation — demo</h2>
+    <p>මෙම demo එකේ <strong>Login</strong> බොත්තම ඔබන විට animation එක පෙන්වනු ලැබේ. ඔබගේ site එකේ login success callback එකට showNarutoAnimation() හරහා ඇමතුම කරන්න.</p>
+
+    <!-- Demo login controls -->
+    <div style="display:flex; gap:12px; align-items:center;">
+      <button class="btn-login" id="demo-login">Login (demo)</button>
+      <button class="btn-close" id="demo-hide">Hide Animation</button>
+    </div>
+  </main>
+
+  <!-- Overlay that appears on login -->
+  <div id="naruto-overlay" aria-hidden="true">
+    <div class="naruto-card" role="dialog" aria-modal="true" aria-label="Welcome animation">
+      <div class="face" aria-hidden="true">
+        <div class="headband"></div>
+        <div class="symbol">swirl</div>
+      </div>
+
+      <div class="rasengan" aria-hidden="true" title="energy"></div>
+
+      <div style="margin-top:6px;">
+        <div class="title">Welcome back!</div>
+        <div class="subtitle">ඔබ ලොග් වීම සැමරීමට සුදුසු විලාසිතාවක්</div>
+      </div>
+      <div class="demo-area" style="margin-top:6px;">
+        <button class="btn-login" onclick="hideNarutoAnimation()">Close now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Show overlay for a limited time (default 5s). Call this on successful login.
+    function showNarutoAnimation(durationMs = 5000){
+      const overlay = document.getElementById('naruto-overlay');
+      if(!overlay) return;
+      overlay.style.display = 'flex';
+      overlay.setAttribute('aria-hidden','false');
+
+      // auto-hide after duration
+      clearTimeout(window.__narutoHideTimer);
+      window.__narutoHideTimer = setTimeout(() => {
+        hideNarutoAnimation();
+      }, durationMs);
+    }
+
+    function hideNarutoAnimation(){
+      const overlay = document.getElementById('naruto-overlay');
+      if(!overlay) return;
+      overlay.style.display = 'none';
+      overlay.setAttribute('aria-hidden','true');
+      clearTimeout(window.__narutoHideTimer);
+    }
+
+    // Demo hooks
+    document.getElementById('demo-login').addEventListener('click', function(){
+      // In real usage call showNarutoAnimation() after verifying user credentials
+      showNarutoAnimation(5200);
+    });
+    document.getElementById('demo-hide').addEventListener('click', hideNarutoAnimation);
+
+    // Optional: show automatically if you detect a login flag in your app
+    // if(sessionStorage.getItem('justLoggedIn')) showNarutoAnimation();
+  </script>
+</body>
+</html>
